@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from engine.scenes import Scene
 from engine.scenes import Fonts
+from engine.input import Config
 from engine import processor
 
 from engine import utils
@@ -22,6 +23,11 @@ class Menu(Scene):
 	def __up(self):
 		self.__currentPosition = max(self.__currentPosition - 1, 0)
 		self.__currentSelectorPosition = max(self.__currentSelectorPosition - 1, 0)
+
+	def action(self, channel):
+		if(channel == Config.BT_UP): self.__up()
+		elif(channel == Config.BT_DOWN): self.__down()
+		#TODO: selected option action on enter
 
 	def update(self):
 		image, draw = self._make_base()

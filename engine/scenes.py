@@ -19,7 +19,7 @@ class Scene(object):
 		self._display = display
 
 	def update(self):
-		pass
+		return self._make_base()
 
 	def action(self, channel):
 		pass

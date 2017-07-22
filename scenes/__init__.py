@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-['splash', 'textreader', 'menu']
+['menu', 'splash', 'textreader']

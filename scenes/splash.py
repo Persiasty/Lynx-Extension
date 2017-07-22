@@ -19,6 +19,8 @@ class Splash(Scene):
 			self.__firstUpdateTime = time.time()
 
 		if(time.time() - self.__firstUpdateTime > 3):
+			#TODO: move to menu when enter clicked
+			#TODO: add clock?
 			menu.init_mainmenu()
 		return self._buffer
 
@@ -26,7 +28,8 @@ class Splash(Scene):
 		image, draw = self._make_base()
 		font = self._load_font(Fonts.NovaMono, 32)
 
-		draw.text((8, 0), "Lynx", font=font)
+		draw.rectangle((0, 0), fill="black", outline="black")
+		draw.text((8, 0), "Lynx", font=font, fill="white")
 
 		return image
 

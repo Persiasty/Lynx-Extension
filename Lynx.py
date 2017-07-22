@@ -1,34 +1,43 @@
 # -*- coding: utf-8 -*-
-from engine import display as LynxDisplay, scenes as LynxScenes
-from scenes import menu as LynxMenu
-import time
+from engine import processor as LynxCore
+from engine.displays import con_display as LynxDisplay
+from engine.displays import test_display as LynxDisplay
+from engine.displays import nokia_display as LynxDisplay
 
+from engine.inputs import keyboard_input as LynxInput
+from engine.inputs import gpio_input as LynxInput
+
+from scenes import menu as LynxMenu
 
 def main():
-	display = LynxDisplay.init_test()
+	#Use for Nokia display
+	# display = LynxDisplay.Nokia()
+	#framerate = 2
 
-	opts = [LynxMenu.MenuOption("Starts"),
-	        LynxMenu.MenuOption("Times"),
-	        LynxMenu.MenuOption("Settingss"),
-	        LynxMenu.MenuOption("Connects"),
-	        LynxMenu.MenuOption("Views"),
-	        LynxMenu.MenuOption("Exits"),
-	        LynxMenu.MenuOption("xD")]
-	frame = LynxMenu.Menu(opts)
-	frame.set_display(display)
+	# Use for displaying as imgage
+	# display = LynxDisplay.Test()
 
-	for i in range(5):
-		display.display_frame(frame.display_text())
-		frame._up()
-	for i in range(6):
-		display.display_frame(frame.display_text())
-		frame._down()
+	# Use for displaying in console
+	display = LynxDisplay.Console()
+	framerate = 1
 
-	# lines = [x for x in open("plik.txt", 'r')]
-	# for i in range(500):
-	# 	LynxScenes.display_text(display, lines, title="Hej",offset=(0, -i))
-	#LynxScenes.display_splash(display)
+	# Use for RPi GPIO input
+	# input_method = LynxInput.RPi_GPIO()
 
+	# Use for Keyboard input (Numpad arrows on num lock eg. 8 as UP, [enter] sending command)
+	input_method = LynxInput.Keyboard()
+
+	LynxCore.init_processor(display, input_method, framerate)
+
+	opts = [LynxMenu.MenuOption("Option 1"),
+	        LynxMenu.MenuOption("Option 2"),
+	        LynxMenu.MenuOption("Option 3"),
+	        LynxMenu.MenuOption("Option 4"),
+	        LynxMenu.MenuOption("Option 5"),
+	        LynxMenu.MenuOption("Oprion 6"),
+	        LynxMenu.MenuOption("Exit")]
+
+	LynxMenu.init_menu(opts)
 
 if __name__ == '__main__':
 	main()
